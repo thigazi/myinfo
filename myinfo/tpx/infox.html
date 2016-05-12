@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>IP-Location Maching!</title>
+		
+		<style type="text/css">
+		#mybox {
+			position:relative;
+			border-style:solid;
+			border-width:2px;
+			width:1px;
+			color:#000000;
+			width: 300px;
+			top:20px;
+			margin-left:auto;
+			margin-right:auto;
+			padding:3px;
+			}
+		</style>
+	</head>	
+	<body>
+		<div id="mybox">
+			<table>
+				<tr><td>Country:</td><td>{{ipc}}</td></tr>
+				<tr><td>IP-Address:</td><td>{{ipx}}</td></tr>
+				<tr><td>IP-Address Range:</td><td>{{rip[0]}}-{{rip[1]}}</td></tr>
+				<tr><td>Browser:</td><td>{agent}}</td></tr>
+			</table>
+		</div>								
+	</body>
+</html>

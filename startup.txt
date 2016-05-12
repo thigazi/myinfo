@@ -1,0 +1,5 @@
+#Production Gunicorn
+gunicorn -D -w 4 -b 127.0.0.1:3033 wsgi:application --reload
+
+Development Gunicorn
+gunicorn -w 1 -b 127.0.0.1:3033 wsgi:application --reload
