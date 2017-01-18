@@ -60,3 +60,9 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
+
+#GeoIP Binary Data Files
+GeoLite2-Country.mmdb
+
+#Rsync Tool itself
+rsync.sh

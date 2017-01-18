@@ -1,33 +1,24 @@
 from libs import IMyGeoIP
-from zope.component import queryUtility
+from zope.component import getUtility
 from os import getcwd
 from pyramid.view import view_config
-from socket import AF_INET,AF_INET6
 
 
-def hallo(request):        
-    ipx = request.headers['X-Real-Ip']
-    
-    if len(ipx.split('.')) > 1:
-        gi = queryUtility(IMyGeoIP,'GEOIPZ').gi[0]
-        
-        cix = {
-            'rip':ipx,            
-            'ipc':gi.country_name_by_addr(ipx),
-            'ipcd':gi.country_code_by_addr(ipx),
-            'agent':request.user_agent
-        }            
-        return {'agent': cix['agent'], 'ipx':cix['rip'],'ipc':cix['ipc'],'ipcd':cix['ipcd']}
+def hallo(request):
+    if request.client_addr == '127.0.0.1':
+        ipx = '138.201.227.75'
         
     else:
-        gi = queryUtility(IMyGeoIP,'GEOIPZ').gi[1]   
-        
-        cix = {
-            'rip':ipx,            
-            'ipc':gi.country_name_by_addr_v6(ipx),
-            'ipcd':gi.country_code_by_addr_v6(ipx),
-            'agent':request.user_agent
-        }            
-        
-        return {'agent': cix['agent'], 'ipx':cix['rip'],'ipc':cix['ipc'],'ipcd':cix['ipcd']}
+        ipx = request.client_addr
     
+    gi = getUtility(IMyGeoIP)    
+    response = gi.Reader.country(ipx)
+    print response.country.name    
+    
+    cix = {
+        'rip':ipx,            
+        'ipc':response.country.name,
+        'ipcd':response.country.iso_code,
+        'agent':request.user_agent
+    }            
+    return {'agent': cix['agent'], 'ipx':cix['rip'],'ipc':cix['ipc'],'ipcd':cix['ipcd']}

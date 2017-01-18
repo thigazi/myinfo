@@ -1,4 +1,4 @@
-import GeoIP
+import geoip2.database
 from os import getcwd
 from zope.interface import Interface,implements
 
@@ -9,13 +9,8 @@ class MyGeoIP(object):
     implements(IMyGeoIP)
     
     def __init__(self):
-        fpath = [
-            '%s/GeoIP.dat' % (getcwd()),
-            '%s/GeoIPv6.dat' % (getcwd())
-        ]
+        self.Reader = geoip2.database.Reader(getcwd()+'/GeoLite2-Country.mmdb')
+        #self.Reader.country(ip_address)
         
-        self.gi = [
-            GeoIP.open(fpath[0],GeoIP.GEOIP_STANDARD),
-            GeoIP.open(fpath[1],GeoIP.GEOIP_STANDARD)
-        ]
-    
+    def __delete__(self):
+        self.Reader.close()
