@@ -1,0 +1,5 @@
+geoip2
+pyramid
+pyramid_jinja2
+zope.component
+zope.interface
