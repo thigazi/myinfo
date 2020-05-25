@@ -1,12 +1,12 @@
 import geoip2.database
 from os import getcwd
-from zope.interface import Interface,implements
+from zope.interface import Interface,implementer
 
 class IMyGeoIP(Interface):
     pass
 
-class MyGeoIP(object):
-    implements(IMyGeoIP)
+@implementer(IMyGeoIP)
+class MyGeoIP(object):    
     
     def __init__(self):
         self.Reader = geoip2.database.Reader(getcwd()+'/GeoLite2-Country.mmdb')

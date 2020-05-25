@@ -1,6 +1,6 @@
-import libs,tpx
+from . import libs,tpx
 from pyramid.config import Configurator
-from views import hallo
+from .views import hallo
 from os import getcwd
 
 def main(global_config, **settings):    
